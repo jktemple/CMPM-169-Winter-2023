@@ -101,7 +101,7 @@ function draw() {
 
 function keyReleased() {
   if (keyCode == DELETE || keyCode == BACKSPACE) background(0, 0, 100);
-  if (key == 's' || key == 'S') saveCanvas(gd.timestamp(), 'png');
+  if (key == 's' || key == 'S') saveCanvas('MyCanvas', 'png');
 
   //if (key == '1') strokeColor = color(0, 10);
   if (key == '2') numberOfSides = 2;
