@@ -57,10 +57,11 @@ class MyClass {
  * del, backspace      : erase
  * s                   : save png
  */
-'use strict';
+"use strict";
 
 var strokeColor;
 var numberOfSides;
+var radius;
 
 function setup() {
   createCanvas(720, 720);
@@ -70,6 +71,7 @@ function setup() {
   strokeColor = color(0, 10);
   numberOfSides = 3;
   frameRate(60);
+  radius = 180;
   //angleMode(DEGREES);
 }
 
@@ -77,22 +79,21 @@ function draw() {
   //strokeColor = color(random(0,255), random(0,255), random(0,255), random(0,255));
   if (mouseIsPressed && mouseButton == LEFT) {
     push();
-    translate(mouseX + cos(frameCount)*100, mouseY + sin(frameCount)*100);
-    rotate(frameCount/10000);
+    translate(mouseX + cos(frameCount) * 100, mouseY + sin(frameCount) * 100);
+    rotate(frameCount / 10000);
 
     //circleResolution = int(map(mouseY + 100, 0, height, 2, 10));
-    var radius = mouseX - width / 2;
     var angle = TAU / numberOfSides;
 
     stroke(strokeColor);
-    
+
     beginShape();
     for (var i = 0; i <= numberOfSides; i++) {
       var x = cos(angle * i) * radius;
       var y = sin(angle * i) * radius;
       vertex(x, y);
     }
-    endShape();    
+    endShape();
     pop();
   }
   //angleMode(DEGREES);
@@ -101,16 +102,27 @@ function draw() {
 
 function keyReleased() {
   if (keyCode == DELETE || keyCode == BACKSPACE) background(0, 0, 100);
-  if (key == 's' || key == 'S') saveCanvas('MyCanvas', 'png');
+  if (key == "s" || key == "S") saveCanvas('MyCanvas', "png");
 
   //if (key == '1') strokeColor = color(0, 10);
-  if (key == '2') numberOfSides = 2;
-  if (key == '3') numberOfSides = 3;
-  if (key == '4') numberOfSides = 4;
-  if (key == '5') numberOfSides = 5;
-  if (key == '6') numberOfSides = 6;
-  if (key == '7') numberOfSides = 7;
-  if (key == '8') numberOfSides = 8;
-  if (key == '9') numberOfSides = 9;
-  
+  if (key == "2") numberOfSides = 2;
+  if (key == "3") numberOfSides = 3;
+  if (key == "4") numberOfSides = 4;
+  if (key == "5") numberOfSides = 5;
+  if (key == "6") numberOfSides = 6;
+  if (key == "7") numberOfSides = 7;
+  if (key == "8") numberOfSides = 8;
+  if (key == "9") numberOfSides = 9;
+}
+
+function mouseWheel(event){
+  print(radius + " before");
+  radius += event.delta; 
+  if(radius <= 5){
+    radius = 5;
+  }
+  if(radius >= 720){
+    radius = 720;
+  }
+  print(radius);
 }
